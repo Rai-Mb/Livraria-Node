@@ -25,6 +25,17 @@ class LivroController{
         })
     }
 
+    static listarLivroPorEditora = (req, res) => {
+        const editora = req.query.editora
+        livros.find({'editora': editora}, {}, (err, livros) => {
+            if(err) {
+                res.status(400).send({message: `${err.message} - Editora não localizada.`})
+            } else {   
+            res.status(200).send(livros)
+            }
+        })
+    }
+
     static cadastrarLivro = (req, res) => {
         let livro = new livros (req.body)
         livro.save((err) => {
@@ -59,4 +70,4 @@ class LivroController{
     }
 }
 
-export default LivroController
+export default LivroController;
